@@ -20,7 +20,7 @@ With the introduction of IPv6, and IP address concept arose; it is a concept sim
 
 Although it is not mandatory that C++ Standards Committee follows the Request for Comment (RFC) recommendations (especially when they are recommendations), given the amount of networking expertise in the community producing RFC documents, it is prudent to give them due attention. In that context, the relevant quotes recommending use of a single data structure can be found in References: [R4038-6], [R403861], [R403862]
 
-The proposal for a single IP address class is based on (a) the above recommendations, (b) its simplicity of use, © future-proof design and an existing practice. C++ Portable Components project [POCOCPP] is an existing practice (8 years at the time of this writing) successfully using a single IP address class.
+The proposal for a single IP address class is based on (a) the above recommendations, (b) its simplicity of use, (c) future-proof design and an existing practice. C++ Portable Components project [POCOCPP] is an existing practice (8 years at the time of this writing) successfully using a single IP address class.
 
 Pros:
 
