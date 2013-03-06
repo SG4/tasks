@@ -1,0 +1,131 @@
+IP Address Design Constraints
+
+1 Introduction
+
+This is a summary of IP address classes design constraints aiming to provide a systematic overview of the constraints as well as a foundation for decision on the issue of IP  address classes. Discussion following the IP Address [IPADDR] proposal publishing and subsequent request for comments on the c++std-networking mailing list raised the dilemma about the number of classes needed to optimally capture the IP address concept. The opposing design forces were (a) simplicity of use (one class) vs. (b) space/performance concerns (three classes). Paper describes three approaches with enumerated pros and cons for each and a final score (a sum of pros and cons).
+
+
+2 IP Address Concept
+
+An Internet Protocol address (IP address) is a numerical label assigned to a device participating in a network which uses the Internet Protocol for communication.[RFC760] An IP address serves two principal functions: host or network interface identification and location addressing. Its role has been characterized as follows: "A name indicates what we seek. An address indicates where it is. A route indicates how to get there."[RFC791]
+
+The designers of the Internet Protocol defined an IP address as a 32-bit number[RFC760]; this system, known as Internet Protocol Version 4 (IPv4), is still in widespread use. Due to the enormous growth of the Internet and the predicted depletion of available addresses, a new version of IP (IPv6), using 128 bits for the address, was developed in 1995.[RFC1883] IPv6 was standardized in 1998.[RFC2460] Each RIR received its last /8 from IANA on 3 February 2011; the IANA free pool of IPv4 addresses reached 0%.[IANAv6]
+
+With the introduction of IPv6, and IP address concept arose; it is a concept similar to the integer concept - a set of types with different sizes.
+
+
+3 IP Address Classes Design Options
+
+3.1 One IP Address Class
+
+Although it is not mandatory that C++ Standards Committee follows the Request for Comment (RFC) recommendations (especially when they are recommendations), given the amount of networking expertise in the community producing RFC documents, it is prudent to give them due attention. In that context, the relevant quotes recommending use of a single data structure can be found in References: [R4038-6], [R403861], [R403862]
+
+The proposal for a single IP address class is based on (a) the above recommendations, (b) its simplicity of use, © future-proof design and an existing practice. C++ Portable Components project [POCOCPP] is an existing practice (8 years at the time of this writing) successfully using a single IP address class.
+
+Pros:
+
++ one interface
++ future proof
++ recommended [RFC4038]
+
+Cons:
+
+- size penalty for IPv4
+- performance penalty for IPv4
+- performance penalty for IPv6
+
+
+Score: 0
+
+3.2 Two IP address Classes
+
+The difference between the two approaches described in this paragraph is that the first one (3.2.1) proposes two classes, with IPv4 being only IPv4 and IP playing the "universal" role of both IPv6 or IPv4 class. The second approach (3.2.2) proposes two classes as well; however, these are simply two distinct classes which can be converted from one to another as needed and if possible. Details are described in respective sub-paragraphs.
+
+3.2.1 IPv4/IP
+
+In this variation, IPv4 class provides the IPv4 functionality support. IP, on the other hand, can play the role of either IPv4 or IPv6, depending on the context. This requires that IP class exposes an interface that is union of IPv4 and IPv6 interfaces.
+
+Pros:
+
++ size-optimized IPv4
++ future-proof
+
+Cons:
+
+- performance penalty for IPv6
+- divergence of types
+- discouraged [RFC4038]
+
+Score: -1
+
+3.2.2 IPv6/IPv4
+
+From the size growth standpoint, IP address can be thought of as an equivalent of integer types - ideally, there would be only one integer type of unlimited size; the reality of computing and data storage resources scarcity produces a need for integers of different sizes. These different types are convertible to each other (albeit, with a danger of information loss for narrowing or signed/unsigned conversions).
+
+Pros:
+
++ size-optimized
++ no performance penalty
++ future-proof
+
+Cons:
+
+- divergence of types
+- discouraged [RFC4038]
+
+Score: +1
+
+? IPv4-compatible issue; exists only if IPAddress itself (instead of
+the use context) must know its original family for IPv4-compatible
+case (it can be determined for all other cases)
+
+
+3.3 Three IP address Classes
+
+3.3.1 IP Interface as Intersection
+
+Asio C++ Library project [ASIOCPP] is an existing practice successfully using this design model.
+
++ size and speed optimized IPv4
++ size and speed optimized IPv6
+
+- proliferation of types (e.g. socket_address) and algorithms
+- discouraged [RFC4038]
+
+Score: 0
+
+3.3.2 IP Interface as Union
+
+? intersection or union interface
+
+
+Conclusion
+
+
+References
+
+[IPADDR] "C++ Internet Protocol Classes" (N3477), http://www.open-std.org/JTC1/SC22/WG21/docs/papers/2012/n3477.pdf
+
+[IPWIKI] "IP address", Wikipedia, http://en.wikipedia.org/wiki/IP_address
+
+[IANAv6] "IPv4 Depletion and IPv6 Adoption Today", https://www.arin.net/knowledge/v4_deplete_v6_adopt.pdf
+
+[RFC760] "DOD STANDARD INTERNET PROTOCOL", http://tools.ietf.org/html/rfc760
+
+[RFC791] "INTERNET PROTOCOL DARPA INTERNET PROGRAM PROTOCOL SPECIFICATION", http://tools.ietf.org/html/rfc791
+
+[RFC1883] "Internet Protocol, Version 6 (IPv6) Specification", http://tools.ietf.org/html/rfc1883
+
+[RFC2460] "Internet Protocol, Version 6 (IPv6) Specification", http://tools.ietf.org/html/rfc2460
+
+[RFC4038] "Application Aspects of IPv6 Transition", http://www.ietf.org/rfc/rfc4038.txt
+
+[R4038-6] "6. ... dual applications working with both IPv4 and IPv6 are recommended. These applications should avoid IP dependencies in the source code.  However, if IP dependencies are required, one of the better solutions would be to build a communication library that provides an IP version -  independent API to applications and that hides all dependencies." 
+
+[R403861] "6.1. All memory structures and APIs should be IP version-independent.  One should avoid structs in_addr, in6_addr, sockaddr_in, and sockaddr_in6."
+
+[R403862] "6.2. The new address independent variants getaddrinfo() and getnameinfo() hide the gory details of name-to-address and address-to-name translations."
+
+[POCOCPP] C++ Portable Components, http://pocoproject.org
+
+[ASIOCPP] Asio C++ Library, http://think-async.com/
