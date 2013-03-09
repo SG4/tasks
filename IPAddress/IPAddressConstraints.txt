@@ -1,6 +1,8 @@
 
 IP Address Design Constraints
 
+Aleksandar Fabijanic
+
 1 Introduction
 
 This is a summary of IP address class design constraints that surfaced during Portland SG4 meeting [PORTLD] and subsequent [CPPSTDN] discussions. Goal is to determine a direction for the standard C++ IP address class proposal. This documents does not aim to be a final verdict on what the design of standard IP address class(es) should look like; rather, it summarizes the concerns raised in discussions so far, weighing pros and cons of each proposed design. It is meant to serve as a reference for SG4 IP address discussion during Bristol meeting in April 2013.
@@ -145,7 +147,7 @@ Several options were proposed for the IP address classes design. Options were ju
 Many people have contributed to this summary, directly or indirectly. In particular, the suggestion by Gabriel Dos Reis [CONCGDR] to think of IP address as a concept was very helpful. Significant contributions came from the existing practices of Asio [ASIOCPP] and POCO [POCOCPP] open source projects as well as numerous standards committee meetings and mailing list[CPPSTDN] discussion participants.
 
 
-10 References
+6 References
 
 [IPADDR] "C++ Internet Protocol Classes" (N3477), http://www.open-std.org/JTC1/SC22/WG21/docs/papers/2012/n3477.pdf
 
