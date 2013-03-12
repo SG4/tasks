@@ -24,7 +24,7 @@ This paper describes different approaches with enumerated pros and cons and a qu
 
 Although it is not mandatory that C++ Standards Committee follows the Request for Comment (RFC) recommendations, given the amount of networking experience and expertise behind the RFC documents, it is prudent to give those documents due attention. In that context, the relevant quotes recommending use of a single data structure can be found in [R4038-6], [R403861], [R403862] and RFC recommendations are taken into account when weighing pros and cons of each solution.
 
-when thinking of the IP address concept, it helps to keep the familiar integer concept. In a world without memory space and computation speed limitations, there would be a single integer type capable of accommodating infinitely large value; in reality, the amount of data storage and computing power is limited, mandating multiple integer types of various widths. Furthermore, although the operation set for integer concept is common for all types, there are operations which only make sense for certain types (e.g. comparison 'i < 0' it does not make sense for unsigned 'i'). Same principles apply to the IP address concept; ideally, there would be one IP address version, accommodating infinite number of IP addresses. However, the reality of limited resources mandates IP address versions of different sizes; equivalence with integers also holds in regards to the operation set - there are operations peculiar to an IP address version (e.g. 'is_broadcast()' query does not make sense for an IPv6 address).
+To grasp the IP address concept, comparison with the familiar integer concept helps. In a world without memory space and computation speed limitations, there would be a single integer type capable of accommodating infinitely large value; in reality, the amount of data storage and computing power is limited, mandating multiple integer types of various widths. Furthermore, although the operation set for integer concept is common for all types, there are operations which only make sense for certain types (e.g. comparison 'i < 0' it does not make sense for unsigned 'i'). Same principles apply to the IP address concept; ideally, there would be one IP address version, accommodating infinite number of IP addresses. However, the reality of limited resources mandates IP address versions of different sizes; equivalence with integers also holds in regards to the operation set - there are operations peculiar to an IP address version (e.g. 'is_broadcast()' query does not make sense for an IPv6 address).
 
 In subsequent paragraphs, three distinct modes (with some "submodes") of capturing the IP address concept are laid out.
 
@@ -177,11 +177,11 @@ Many people have contributed to this summary, directly or indirectly. In particu
 
 [POCOCPP] C++ Portable Components, http://pocoproject.org
 
-[CONCGDR] Gabriel Dos Reis gdr@cs.tamu.edu via accu.org Jan 17 to c++std-network.
+[CONCGDR] Gabriel Dos Reis <email removed> via accu.org Jan 17 to c++std-network.
 
-Nevin Liber <nevin@eviloverlord.com> writes:
+Nevin Liber <email removed> writes:
 
-| On 17 January 2013 16:05, Gabriel Dos Reis <gdr@cs.tamu.edu> wrote:
+| On 17 January 2013 16:05, Gabriel Dos Reis <email removed> wrote:
 |
 |     I can understand that this is a very good C design.  I am having
 |     hard time seeing this as an acceptable C++ design.
