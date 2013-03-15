@@ -4,7 +4,6 @@
 
 
 
-
      Document number: N3565                                                     
      Date: 2013-03-15 
      Reply to: Aleksandar Fabijanic <alex@pocoproject.org>                            
@@ -435,7 +434,7 @@
      4. Conclusion 
 
            Several options were proposed for the IP address classes design. Options were 
-        judged for benefits and downsides, with quantitative score assigned to each. Al 
+        judged for benefits and downsides, with quantitative score assigned to each. All
         pros/cons were weighted the same. 
 
          
